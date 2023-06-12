@@ -8,6 +8,8 @@ import { SharedModule } from './Shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './Public/home.component';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtAdderInterceptor } from './Core/Interceptors/jwt-adder.interceptor';
 
 
 @NgModule({
@@ -23,7 +25,10 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtAdderInterceptor, multi:true},
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
